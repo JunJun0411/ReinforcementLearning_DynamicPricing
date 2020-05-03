@@ -4,3 +4,5 @@ reinforcement-learning-kr-master
 Data
 Example
 .ipynb_*
+*.py
+*.ipynb
