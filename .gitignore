@@ -1,6 +1,6 @@
 *.csv
 *.pkl
-reinforcement-learning-kr-master
+*-kr-master
 Data
 Example
 .ipynb_*
