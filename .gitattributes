@@ -1,0 +1,4 @@
+#Auto detect test files and perform LF normalization
+* test=auto
+* linguist-vendored
+*.py linguist-vendored=false
