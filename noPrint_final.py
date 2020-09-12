@@ -170,7 +170,7 @@ if __name__ == "__main__":
 
         plot(episodes, scores, 'b')
         title('{}Time Price: {}, Passenger: {}, Driver: {}'.format(episode, state, Passenger, Driver))
-        savefig("./DP_graph_{}Time.png".format(episode))
+        savefig("./Grape/DP_graph_{}Time.png".format(episode))
 #               print("episode:", episode, "  score:", state, " global_step:",
 #                      global_step, "  epsilon:", agent.epsilon)
         clf() 
