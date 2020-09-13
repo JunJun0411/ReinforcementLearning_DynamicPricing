@@ -46,7 +46,7 @@ class Env:
         reward = 0
         
         #보상 가격허용치를 넘으면 -100
-        if next_state < (INITIALPRICE / 2) or next_state > (INITIALPRICE * 2):
+        if next_state < (INITIALPRICE / 4) or next_state > (INITIALPRICE * 1.5):
             reward = -100
             
         else:
