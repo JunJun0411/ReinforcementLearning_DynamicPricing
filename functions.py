@@ -114,7 +114,7 @@ def ScaledHdbscan(idx, pp, cluster_size = 7):
     while labelNum < 3:
         cnt += 1
         if cnt > 4:
-            print("labelNum < 3")
+#            print("labelNum < 3")
             break
         cluster_size -= 1
         clusterer, labelNum = myHdbscan(train_data_robustScaled, cluster_size)

@@ -65,7 +65,8 @@ class Env:
         # 매칭 매트릭스 초기화
         self.PD = PD
         self.matrix = matrix
-            
+        self.marketPrice = INITIALPRICE
+
         return self.marketPrice
         
 # 가격 Agent
