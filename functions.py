@@ -1,30 +1,24 @@
 # coding: utf-8
 
 # Q-learning table사용
-import scipy
-import scipy.stats
-import cupy as np
-from cupy import asarray, concatenate, zeros, where, unique, asnumpy, bincount, argmax, argpartition, argsort, unravel_index, max as cmax, min as cmin, random as crandom
+from cupy import asarray, concatenate, zeros, where, unique, asnumpy, bincount, argmax, argpartition, \
+argsort, unravel_index, max as cmax, min as cmin, random as crandom
 import numpy
-from random import choice
-import pylab
-from collections import defaultdict
-import pickle as pkl
-from tqdm import tqdm_notebook
+from pickle import load
 
 INITIALPRICE = 3800
 
 def data_load():
     with open('./Data/dclus1.pkl', 'rb') as f:
-        dclus = pkl.load(f)
+        dclus = load(f)
         dclus = [asarray(i.astype('float').values) for i in dclus]
     
     with open('./Data/pp.pkl', 'rb') as f:
-        pp = pkl.load(f)
+        pp = load(f)
         pp = [asarray(i.astype('float')) for i in pp]
 
     with open('./Data/dd.pkl', 'rb') as f:
-        dd = pkl.load(f)
+        dd = load(f)
         dd = [asarray(i.astype('float')) for i in dd]
         
     return dclus, pp, dd
@@ -184,12 +178,12 @@ def mat2(PP, DP, next_state, PD, matrix):
     D_Matrix = D_Matrix / D_Matrix.max() # 0 ~ 1
 
     # 중앙값 : outlier의 영향이 적기 때문,
-    Pmid = numpy.median(np.asnumpy(P_Matrix))
-    Dmid = numpy.median(np.asnumpy(D_Matrix))
+    Pmid = numpy.median(asnumpy(P_Matrix))
+    Dmid = numpy.median(asnumpy(D_Matrix))
 
     # 중앙값 미만의 확률들은 0으로 초기화
-    P_Matrix = np.where(P_Matrix < Pmid, 0, P_Matrix)
-    D_Matrix = np.where(D_Matrix < Dmid, 0, D_Matrix)
+    P_Matrix = where(P_Matrix < Pmid, 0, P_Matrix)
+    D_Matrix = where(D_Matrix < Dmid, 0, D_Matrix)
     
     newMatrix = P_Matrix * D_Matrix
     
@@ -198,16 +192,16 @@ def mat2(PP, DP, next_state, PD, matrix):
 def pick(newMatrix, MIN):
     """ Matrix에서 모든 수가 0인 행, 열 뺐을 경우 min(행, 열) """
     
-    newMatrix = np.where(newMatrix == 0., 0, 1)
+    newMatrix = where(newMatrix == 0., 0, 1)
     
     Pa = newMatrix.shape[0]
     Dr = newMatrix.shape[1]
 
     if newMatrix.sum(1).min() == 0:
-        Pa = np.where(newMatrix.sum(1) == 0, 0, 1).sum()
+        Pa = where(newMatrix.sum(1) == 0, 0, 1).sum()
 
     if newMatrix.sum(0).min() == 0:
-        Dr = np.where(newMatrix.sum(0) == 0, 0, 1).sum()
+        Dr = where(newMatrix.sum(0) == 0, 0, 1).sum()
     return MIN - min(Pa, Dr)
 
 def pick2(mat, threshold = 0.4):
