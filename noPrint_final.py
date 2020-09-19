@@ -6,7 +6,6 @@ from numpy import median
 from random import choice
 from pylab import plot, savefig, title, clf
 from collections import defaultdict
-from pickle import load
 from tqdm import tqdm, tqdm_notebook
 from functions import data_load, randomSampling, trip_Distance, Calculate_distance,Calculate_Matrix, myHdbscan, ScaledHdbscan, dbcluster, mat2, pick
 
@@ -53,7 +52,7 @@ class Env:
             """ 방법 2 Matrix 생성 후 뽑기"""
             newMatrix, MIN = mat2(self.PP, self.DP, next_state, self.PD, self.matrix)
             match = pick(newMatrix, MIN)
-            reward = (match / 1000) * (next_state / 1000)
+            reward = (match) * (next_state / 1000)
 
         return next_state, reward
         

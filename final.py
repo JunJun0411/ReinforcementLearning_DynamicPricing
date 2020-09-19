@@ -5,7 +5,6 @@ from numpy import median
 from random import choice
 from pylab import plot, savefig, title, clf
 from collections import defaultdict
-from pickle import load
 from tqdm import tqdm_notebook, tqdm
 from functions import data_load, randomSampling, trip_Distance, Calculate_distance,\
 Calculate_Matrix, myHdbscan, ScaledHdbscan, dbcluster, mat2, pick
