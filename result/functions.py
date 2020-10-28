@@ -9,15 +9,15 @@ from pickle import load
 INITIALPRICE = 3800
 
 def data_load():
-    with open('./Data/dclus1.pkl', 'rb') as f:
+    with open('../Data/dclus1.pkl', 'rb') as f:
         dclus = load(f)
         dclus = [asarray(i.astype('float').values) for i in dclus]
     
-    with open('./Data/pp.pkl', 'rb') as f:
+    with open('../Data/pp.pkl', 'rb') as f:
         pp = load(f)
         pp = [asarray(i.astype('float')) for i in pp]
 
-    with open('./Data/dd.pkl', 'rb') as f:
+    with open('../Data/dd.pkl', 'rb') as f:
         dd = load(f)
         dd = [asarray(i.astype('float')) for i in dd]
         
