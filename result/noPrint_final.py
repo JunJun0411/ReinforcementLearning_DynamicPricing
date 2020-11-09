@@ -44,10 +44,14 @@ class Env:
         next_state = self.marketPrice
         reward = 0
         
-        #보상 가격허용치를 넘으면 -100
-        if next_state < (INITIALPRICE / 4) or next_state > (INITIALPRICE * 1.5):
-            reward = -100
+        # S' < 시장가격 절반가격 이하로 내려갈 경우
+        if next_state < (INITIALPRICE / 2):
+            reward = next_state - (INITIALPRICE * 3) / 2
             
+         # S' < 시장가격 2배 가격 이상으로 올라갈 경우
+        elif next_state > (INITIALPRICE * 2):
+            reward = INITIALPRICE - next_state
+
         else:
             """ 방법 2 Matrix 생성 후 뽑기"""
             newMatrix, MIN = mat2(self.PP, self.DP, next_state, self.PD, self.matrix)
@@ -151,7 +155,8 @@ if __name__ == "__main__":
         agent.reset()
 
         for i in tqdm(range(50000)):
-            global_step += 1
+            #learningRate 조정
+            agent.learning_rate = 500 / (i + 501)
 
             # 현재 상태에 대한 행동 선택
             action = agent.get_action(str(state))
@@ -171,6 +176,7 @@ if __name__ == "__main__":
         plot(episodes, scores, 'b')
         title('{}Time Price: {}, Passenger: {}, Driver: {}'.format(episode, state, Passenger, Driver))
         savefig("./Grape/DP_graph_{}Time.png".format(episode))
+#               global_step += 1
 #               print("episode:", episode, "  score:", state, " global_step:",
 #                      global_step, "  epsilon:", agent.epsilon)
         clf() 
