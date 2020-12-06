@@ -174,8 +174,8 @@ if __name__ == "__main__":
             episodes.append(i)
 
         plot(episodes, scores, 'b')
-        title('{}Time Price: {}, Passenger: {}, Driver: {}'.format(episode, state, Passenger, Driver))
-        savefig("./Grape/DP_graph_{}Time.png".format(episode))
+        title('Price: {}, Passenger: {}, Driver: {}'.format(state, Passenger, Driver))
+        savefig("./Grape1/DP_graph_{}Time.png".format(episode))
 #               global_step += 1
 #               print("episode:", episode, "  score:", state, " global_step:",
 #                      global_step, "  epsilon:", agent.epsilon)
